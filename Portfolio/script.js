@@ -167,3 +167,36 @@ if (yearSpan) {
   yearSpan.textContent = new Date().getFullYear().toString();
 }
 
+// See More Certificates
+const seeMoreBtn = document.getElementById("see-more-btn");
+const extraCertificates = document.querySelectorAll(".extra-certificate");
+
+// Certificate Image Popup (Works for Unlimited Images)
+
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("certificate-img")) {
+    const src = e.target.src;
+
+    const modal = document.createElement("div");
+    modal.classList.add("image-modal");
+
+    modal.innerHTML = `
+      <div class="modal-overlay"></div>
+      <img src="${src}" class="modal-image">
+    `;
+
+    document.body.appendChild(modal);
+
+    modal.addEventListener("click", () => {
+      modal.remove();
+    });
+  }
+});
+
+// Auto stagger animation for unlimited cards
+document.querySelectorAll(".scroll-section").forEach(section => {
+  const cards = section.querySelectorAll(".layer-card");
+  cards.forEach((card, index) => {
+    card.style.setProperty("--card-index", index);
+  });
+});
