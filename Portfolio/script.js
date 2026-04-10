@@ -200,3 +200,18 @@ document.querySelectorAll(".scroll-section").forEach(section => {
     card.style.setProperty("--card-index", index);
   });
 });
+
+// Click to expand card
+function toggleCard(card) {
+  card.classList.toggle("active");
+}
+
+// Scroll reveal (AOS style)
+window.addEventListener("scroll", () => {
+  document.querySelectorAll(".reveal").forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) {
+      el.classList.add("active");
+    }
+  });
+});
