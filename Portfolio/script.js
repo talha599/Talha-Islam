@@ -1,217 +1,816 @@
-// ===============================
-// Theme (Light / Dark Mode) Logic
-// ===============================
+<!DOCTYPE html>
+<html lang="en">
 
-// Use localStorage key to remember theme preference
-const THEME_KEY = "portfolio-theme";
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <meta name="theme-color" content="#1c1917" />
+  <title>Muhammad Talha Islam</title>
+    <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/Asset/BookMark.jpeg">
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
 
-// Cache some key DOM elements once
-const body = document.body;
-const themeToggleBtn = document.getElementById("theme-toggle");
-const themeToggleIcon = themeToggleBtn?.querySelector("i");
-const nav = document.getElementById("nav");
-const menuToggleBtn = document.getElementById("menu-toggle");
-const navLinks = document.querySelectorAll(".nav-link");
-const yearSpan = document.getElementById("year");
-const contactForm = document.getElementById("contact-form");
-const formStatus = document.getElementById("form-status");
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
 
-// Helper: apply theme class to body
-function applyTheme(theme) {
-  const isDark = theme === "dark";
-  body.classList.toggle("dark", isDark);
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
 
-  // Update icon based on current theme
-  if (themeToggleIcon) {
-    themeToggleIcon.classList.toggle("fa-moon", !isDark);
-    themeToggleIcon.classList.toggle("fa-sun", isDark);
-  }
-}
+<body>
+  <!-- =======================================
+       Header / Navigation + Dark Mode Toggle
+       ======================================= -->
+  <header class="header" id="top">
+    <div class="container header-inner">
+      
+        <a href="#hero" class="logo">TALHA<span>.</span></a>
 
-// Helper: get preferred theme
-// - If user has a stored choice, use it
-// - Otherwise default to dark for a darker overall look
-function getInitialTheme() {
-  const stored = window.localStorage.getItem(THEME_KEY);
-  if (stored === "light" || stored === "dark") {
-    return stored;
-  }
+      <nav class="nav" id="nav">
+        <a href="#hero" class="nav-link active">Home</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#certificates" class="nav-link">Certificates</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
 
-  // Default to dark theme when there is no stored preference
-  return "dark";
-}
+      <div class="header-actions">
+        <!-- Dark mode toggle -->
+        <button id="theme-toggle" class="icon-button" aria-label="Toggle dark mode">
+          <i class="fa-solid fa-moon"></i>
+        </button>
 
-// Initialize theme on page load
-const initialTheme = getInitialTheme();
-applyTheme(initialTheme);
+        <!-- Mobile menu button -->
+        <button id="menu-toggle" class="icon-button menu-toggle" aria-label="Toggle navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
 
-// Allow user to toggle theme manually
-if (themeToggleBtn) {
-  themeToggleBtn.addEventListener("click", () => {
-    const current = body.classList.contains("dark") ? "dark" : "light";
-    const next = current === "dark" ? "light" : "dark";
-    applyTheme(next);
-    window.localStorage.setItem(THEME_KEY, next);
-  });
-}
+  <!-- ======================
+       Hero / Intro Section
+       ====================== -->
+  <section class="hero" id="hero">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Hi, I'm</p>
+        <h1 class="hero-title">Muhammad Talha Islam</h1>
+       <h2 class="hero-subtitle">
+         <span id="changing-text"></span><span class="cursor">|</span>
+       </h2>
+        <p class="hero-text">
+          Computer Science & Engineering student skilled in C, C++, Java, Python, and SQL with hands-on experience in software and database development. Passionate about innovation, leadership, and building impactful tech solutions.
+        </p>
 
-// ===============================
-// Mobile Navigation Toggle
-// ===============================
+        <!-- Social icons (colorful circular) -->
+        <div class="hero-socials">
+          <a href="https://github.com/talha599" target="_blank" rel="noopener noreferrer"
+             aria-label="GitHub" class="social-link social-github">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/talha-islam49599/" target="_blank" rel="noopener noreferrer"
+             aria-label="LinkedIn" class="social-link social-linkedin">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <a href="https://www.facebook.com/talha49599" target="_blank" rel="noopener noreferrer"
+             aria-label="Facebook" class="social-link social-facebook">
+            <i class="fa-brands fa-facebook"></i>
+          </a>
+        </div>
+        
+        <div class="hero-actions">
+          <a href="#projects" class="btn primary-btn"><span>View Projects</span></a>
+          <a href="/Asset/MUHAMMAD TALHA ISLAM.pdf" class="btn ghost-btn" download><span>Download CV</span>
+  </a>
+        </div>
+      </div>
 
-if (menuToggleBtn && nav) {
-  menuToggleBtn.addEventListener("click", () => {
-    nav.classList.toggle("open");
-  });
-}
+      <!-- Profile image -->
+      <div class="hero-image-wrapper">
+        <div class="hero-image">
+          <img src="/Asset/My Image 1.jpeg" alt="Muhammad Talha Islam" class="profile-image">
+        </div>
+      </div>
+    </div>
+  </section>
 
-// Close mobile nav when clicking a link
-navLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    nav?.classList.remove("open");
-  });
-});
 
-// ===============================
-// Active Navigation on Scroll
-// ===============================
+  <!-- ======================
+     Experience Section
+     ====================== -->
+<section class="experience-section" id="experience">
+  <h2 class="section-title">Experience</h2>
+<p class="section-description scroll-layer layer-2"> A record of leadership experience built through active <br>roles in student organizations, event coordination, and collaborative team initiatives. </p>
+  <div class="timeline">
 
-// Observe section intersections to highlight matching nav link
-const sections = document.querySelectorAll("section[id]");
+    <!-- Card 1 -->
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
 
-if ("IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const id = entry.target.getAttribute("id");
-        const link = document.querySelector(`.nav-link[href="#${id}"]`);
+      <div class="timeline-card" onclick="toggleCard(this)">
+        <img src="/Asset/gg.jpg" class="exp-logo">
 
-        if (!link) return;
+        <h3>Goriber Gadget</h3>
+        <span>Campus Ambassador <br>(2024 - Present)</span>
 
-        if (entry.isIntersecting) {
-          navLinks.forEach((navLink) => navLink.classList.remove("active"));
-          link.classList.add("active");
-          entry.target.classList.add("visible");
-          // Layer-by-layer: add .in-view to scroll sections for reveal animations
-          if (entry.target.classList.contains("scroll-section")) {
-            entry.target.classList.add("in-view");
-          }
-        }
-      });
-    },
-    { root: null, threshold: 0.2, rootMargin: "0px 0px -5% 0px" }
-  );
+        <p class="short">
+          Promoting Tech products and managing campus engagement.
+        </p>
 
-  sections.forEach((section) => observer.observe(section));
-}
+        <p class="details">
+          Responsible for marketing campaigns, student outreach, and increasing brand visibility across campus.
+        </p>
+      </div>
+    </div>
 
-// ===============================
-// Scroll-reveal: layer-by-layer in-view
-// ===============================
-// When a .scroll-section enters viewport, CSS reveals .scroll-layer elements with staggered delays.
-const scrollSections = document.querySelectorAll(".scroll-section");
-if ("IntersectionObserver" in window && scrollSections.length) {
-  const scrollRevealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in-view");
-        }
-      });
-    },
-    { root: null, threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
-  );
-  scrollSections.forEach((el) => scrollRevealObserver.observe(el));
-}
+    <!-- Card 2 (Promotion) -->
+    <div class="timeline-item reveal">
+      <div class="timeline-dot glow"></div>
 
-// ===============================
-// Contact Form Handling
-// ===============================
+      <div class="timeline-card highlight" onclick="toggleCard(this)">
+        <img src="/Asset/acc.png" class="exp-logo">
 
-if (contactForm && formStatus) {
-  contactForm.addEventListener("submit", (event) => {
-    event.preventDefault();
+        <h3>AIUB Computer Club</h3>
+        <span>Assistant General Secretary <br>(2023 - Present)</span>
 
-    const formData = new FormData(contactForm);
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const message = formData.get("message");
+        <p class="short">
+          Started as General Member → promoted to leadership role.
+        </p>
 
-    // Basic client-side validation (HTML5 validation already in place)
-    if (!name || !email || !message) {
-      formStatus.textContent = "Please fill out all fields.";
-      formStatus.classList.remove("success");
-      formStatus.classList.add("error");
-      return;
-    }
+        <p class="details">
+          Managed events, coordination, documentation, and leadership tasks after promotion due to active contribution.
+        </p>
 
-    // Demo behavior: show success message instead of real backend call
-    formStatus.textContent = "Thanks for your message! I'll get back to you soon.";
-    formStatus.classList.remove("error");
-    formStatus.classList.add("success");
+        <div class="promotion">⬆ Promoted</div>
+      </div>
+    </div>
 
-    // Optionally clear the form
-    contactForm.reset();
+    <!-- Card 3 -->
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
 
-    // Optionally, in a real app you could:
-    // - Send data to an API endpoint with fetch()
-    // - Or open a mailto: link pre-filled with the message
-  });
-}
+      <div class="timeline-card" onclick="toggleCard(this)">
+        <img src="/Asset/nsteamo.jpg" class="exp-logo">
 
-// ===============================
-// Misc: Dynamic Year in Footer
-// ===============================
+        <h3>National STEAM Olympiad</h3>
+        <span>Volunteer <br>(2023 - 2024)</span>
 
-if (yearSpan) {
-  yearSpan.textContent = new Date().getFullYear().toString();
-}
+        <p class="short">
+          Assisted in STEAM education events and coordination.
+        </p>
 
-// See More Certificates
-const seeMoreBtn = document.getElementById("see-more-btn");
-const extraCertificates = document.querySelectorAll(".extra-certificate");
+        <p class="details">
+          Worked in event management, participant handling, and educational program support.
+        </p>
+      </div>
+    </div>
 
-// Certificate Image Popup (Works for Unlimited Images)
+  </div>
+</section>
+ 
+<!-- ======================
+       About Me Section
+       ====================== -->
+ <section class="section scroll-section" id="about">
+  <div class="container section-inner about-inner">
+    <div class="about-image-wrapper scroll-layer layer-1">
+      <div class="about-image">
+        <img src="/Asset/My Image 2.jpeg" alt="Muhammad Talha Islam" class="about-profile-image">
+      </div>
+    </div>
 
-document.addEventListener("click", function (e) {
-  if (e.target.classList.contains("certificate-img")) {
-    const src = e.target.src;
+    <div class="about-content">
+      <h2 class="section-title section-title-about scroll-layer layer-1">About Me</h2>
 
-    const modal = document.createElement("div");
-    modal.classList.add("image-modal");
+      <p class="scroll-layer layer-2">
+        I am a Software Engineer passionate about building scalable,
+        efficient, and user-friendly applications. I focus on writing
+        clean, maintainable code and solving real-world problems
+        using modern programming technologies.
+      </p>
 
-    modal.innerHTML = `
-      <div class="modal-overlay"></div>
-      <img src="${src}" class="modal-image">
-    `;
+      <p class="scroll-layer layer-3">
+        I continuously explore new frameworks, system design concepts,
+        and software development. My goal is to develop
+        high-quality software solutions that deliver performance,
+        security, and great user experience.
+      </p>
 
-    document.body.appendChild(modal);
+      <div class="about-highlights">
+        <div class="highlight-card scroll-layer layer-4">
+          <h3>Application Development</h3>
+          <p>
+            Developing web and software applications using modern
+            programming languages and frameworks.
+          </p>
+        </div>
+        <div class="highlight-card scroll-layer layer-5">
+          <h3>System Design & Problem Solving</h3>
+          <p>
+            Designing efficient system architectures and solving
+            complex problems with optimized algorithms.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    modal.addEventListener("click", () => {
-      modal.remove();
-    });
-  }
-});
 
-// Auto stagger animation for unlimited cards
-document.querySelectorAll(".scroll-section").forEach(section => {
-  const cards = section.querySelectorAll(".layer-card");
-  cards.forEach((card, index) => {
-    card.style.setProperty("--card-index", index);
-  });
-});
 
-// Click to expand card
-function toggleCard(card) {
-  card.classList.toggle("active");
-}
+  <!-- ======================
+       Skills Section
+       ====================== -->
+ <section class="section scroll-section" id="skills">
+  <div class="container section-inner">
+    <div class="section-header">
+      <h2 class="section-title section-title-skills scroll-layer layer-1">Skills</h2>
+      <p class="section-description scroll-layer layer-2">
+        A practical overview of programming languages, development tools,
+        and database technologies I use to build efficient and scalable applications.
+      </p>
+    </div>
 
-// Scroll reveal (AOS style)
-window.addEventListener("scroll", () => {
-  document.querySelectorAll(".reveal").forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    if (top < window.innerHeight - 100) {
-      el.classList.add("active");
-    }
-  });
-});
+    <!-- Skills grid -->
+    <div class="skills-grid">
+
+      <!-- Python -->
+      <div class="skill-card scroll-layer layer-card">
+        <i class="fa-brands fa-python skill-icon" style="color:#3776AB;"></i>
+        <h3>Python</h3>
+        <p>Object-oriented programming, scripting, problem solving, and backend development.</p>
+      </div>
+
+      <!-- JavaScript -->
+      <div class="skill-card scroll-layer layer-card">
+        <i class="fa-brands fa-js skill-icon" style="color:#F7DF1E;"></i>
+        <h3>JavaScript</h3>
+        <p>Interactive web development, DOM manipulation, and modern ES6 features.</p>
+      </div>
+
+      <!-- PHP -->
+      <div class="skill-card scroll-layer layer-card">
+        <i class="fa-brands fa-php skill-icon" style="color:#777BB4;"></i>
+        <h3>PHP</h3>
+        <p>Server-side scripting, form handling, and dynamic website development.</p>
+      </div>
+
+      <!-- SQL -->
+      <div class="skill-card scroll-layer layer-card">
+        <i class="fa-solid fa-database skill-icon" style="color:#F29111;"></i>
+        <h3>SQL</h3>
+        <p>Database querying, joins, normalization, and data management.</p>
+      </div>
+
+      <!-- HTML -->
+      <div class="skill-card scroll-layer layer-card">
+        <i class="fa-brands fa-html5 skill-icon" style="color:#E34F26;"></i>
+        <h3>HTML</h3>
+        <p>Semantic structure, accessibility, and responsive webpage layout.</p>
+      </div>
+
+      <!-- CSS -->
+      <div class="skill-card scroll-layer layer-card">
+        <i class="fa-brands fa-css3-alt skill-icon" style="color:#1572B6;"></i>
+        <h3>CSS</h3>
+        <p>Responsive design, Flexbox, Grid, and modern UI styling techniques.</p>
+      </div>
+
+      <!-- Oracle -->
+      <div class="skill-card scroll-layer layer-card">
+        <i class="fa-solid fa-database skill-icon" style="color:#F80000;"></i>
+        <h3>Oracle</h3>
+        <p>Relational database systems, query optimization, and enterprise database solutions.</p>
+      </div>
+
+      <!-- Git -->
+      <div class="skill-card scroll-layer layer-card">
+        <i class="fa-brands fa-git-alt skill-icon" style="color:#F05032;"></i>
+        <h3>Git</h3>
+        <p>Version control, branching, merging, and collaborative workflows.</p>
+      </div>
+
+      <!-- Visual Studio -->
+      <div class="skill-card scroll-layer layer-card">
+        <i class="fa-solid fa-code skill-icon" style="color:#5C2D91;"></i>
+        <h3>Visual Studio</h3>
+        <p>IDE usage for debugging, project management, and application development.</p>
+      </div>
+
+      <!-- SQL Server (fixed) -->
+      <div class="skill-card scroll-layer layer-card">
+        <i class="fa-brands fa-microsoft skill-icon" style="color:#CC2927;"></i>
+        <h3>SQL Server</h3>
+        <p>Database management, stored procedures, and enterprise data solutions.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- ======================
+       Projects Section
+       ====================== -->
+ <section class="section scroll-section" id="projects">
+  <div class="container section-inner">
+    <div class="section-header">
+      <h2 class="section-title section-title-projects scroll-layer layer-1">Projects</h2>
+      <p class="section-description scroll-layer layer-2">
+        A selection of academic and practical projects that demonstrate my
+        skills in software development, database management, and computer graphics.
+      </p>
+    </div>
+
+    <!-- Project cards grid -->
+    <div class="projects-grid">
+
+<!-- To-Do Manager Project -->
+<article class="project-card scroll-layer layer-card">
+  <div class="project-image">
+    <img src="Asset/todo.png" alt="To-Do Manager Screenshot">
+  </div>
+
+  <div class="project-content">
+    <h3 class="project-title">To-Do Manager (Desktop App)</h3>
+
+    <p class="project-description">
+      A user-friendly desktop application built with Python to manage daily tasks efficiently.
+      Features include task creation, priority levels, due dates, and persistent data storage.
+      Designed using OOP principles with a clean GUI interface.
+    </p>
+
+    <div class="project-tags">
+      <span>Python</span>
+      <span>Tkinter</span>
+      <span>OOP</span>
+      <span>Desktop App</span>
+    </div>
+
+    <div class="project-links">
+      <a href="https://github.com/talha599/python-project-to_do_manager" 
+         target="_blank" 
+         rel="noreferrer" 
+         class="btn ghost-btn small-btn">
+        GitHub
+      </a>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+<!-- Car Rental System -->
+<article class="project-card scroll-layer layer-card">
+  <div class="project-image">
+    <img src="Asset/car.jpg" alt="Car Rental System Screenshot">
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">Car Rental System</h3>
+    <p class="project-description">
+      A dynamic car rental management system that allows users to book, manage, 
+      and track rental vehicles efficiently. Includes features like customer handling, 
+      booking records, and availability management.
+    </p>
+    <div class="project-tags">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>PHP</span>
+            <span>SQL</span>
+    </div>
+    <div class="project-links">
+      <a href="https://github.com/talha599/Car-Rental-System" 
+         target="_blank" 
+         rel="noreferrer" 
+         class="btn ghost-btn small-btn">
+        GitHub
+      </a>
+    </div>
+  </div>
+</article>
+
+      <!-- Banking System -->
+      <article class="project-card scroll-layer layer-card">
+<div class="project-image">
+  <img src="Asset/banking-system.jpg" alt="Banking System Screenshot">
+</div>
+        <div class="project-content">
+          <h3 class="project-title">Banking System</h3>
+          <p class="project-description">
+            A banking application that manages account creation, deposits,
+            withdrawals, and transaction history. Designed with structured
+            programming principles and secure data handling concepts.
+          </p>
+          <div class="project-tags">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>PHP</span>
+            <span>SQL</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/talha599/Banking-System" 
+               target="_blank" 
+               rel="noreferrer" 
+               class="btn ghost-btn small-btn">
+              GitHub
+            </a>
+          </div>
+        </div>
+      </article>
+
+
+      <!-- Weather App -->
+<article class="project-card scroll-layer layer-card">
+  <div class="project-image">
+    <img src="Asset/weather.png" alt="Weather App Screenshot">
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">Weather App</h3>
+    <p class="project-description">
+      A weather forecasting application that provides real-time weather updates, 
+      including temperature, humidity, and conditions for different cities. 
+      Features auto-location detection and a clean user interface.
+    </p>
+    <div class="project-tags">
+      <span>Python</span>
+      <span>API</span>
+      <span>GUI</span>
+    </div>
+    <div class="project-links">
+      <a href="https://github.com/talha599/python-project-WeatherApp" 
+         target="_blank" 
+         rel="noreferrer" 
+         class="btn ghost-btn small-btn">
+        GitHub
+      </a>
+    </div>
+  </div>
+</article>
+
+
+      <!-- Padma Bridge Graphics Project -->
+      <article class="project-card scroll-layer layer-card">
+<div class="project-image">
+  <img src="Asset/padma-bridge.jpg" alt="Padma Bridge Graphics Project Screenshot">
+</div>
+        <div class="project-content">
+          <h3 class="project-title">The Padma Bridge – Graphics Project</h3>
+          <p class="project-description">
+            A computer graphics project that visually represents the Padma Bridge
+            using graphical transformations, rendering techniques, and animation concepts.
+            Built to demonstrate graphics fundamentals and creativity.
+          </p>
+          <div class="project-tags">
+            <span>Computer Graphics</span>
+            <span>OpenGL</span>
+            <span>Visualization</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/talha599/computer-graphics-project" 
+               target="_blank" 
+               rel="noreferrer" 
+               class="btn ghost-btn small-btn">
+              GitHub
+            </a>
+          </div>
+        </div>
+      </article>
+
+
+      <!-- Supershop Management System -->
+      <article class="project-card scroll-layer layer-card">
+<div class="project-image">
+  <img src="Asset/supershop.png" alt="Supershop Management System Screenshot">
+</div>
+        <div class="project-content">
+          <h3 class="project-title">Supershop Management System</h3>
+          <p class="project-description">
+            A complete shop management system designed to handle product inventory,
+            billing, customer records, and sales tracking efficiently. 
+            Focused on database integration and structured system workflow.
+          </p>
+          <div class="project-tags">
+            <span>C#</span>
+            <span>SQL</span>
+            <span>Management System</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/talha599/Supershop-Management-System" 
+               target="_blank" 
+               rel="noreferrer" 
+               class="btn ghost-btn small-btn">
+              GitHub
+            </a>
+          </div>
+        </div>
+      </article>
+
+
+
+
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ======================
+     Certificates & Achievements
+     ====================== -->
+<section class="section scroll-section" id="certificates">
+  <div class="container section-inner">
+    <div class="section-header">
+      <h2 class="section-title scroll-layer layer-1">Certificates & Achievements</h2>
+      <p class="section-description scroll-layer layer-2">
+        Certifications and achievements that demonstrate my technical growth,
+        leadership experience, and continuous learning journey.
+      </p>
+    </div>
+
+    <!-- Certificates Grid (Same as Skills Grid) -->
+    <div class="skills-grid">
+
+
+
+      <!-- Certificate 12 -->
+      <div class="skill-card scroll-layer layer-card">
+        <img src="/Asset/c12.jpg" alt="Web Development Workshop Certificate" class="certificate-img">
+        <h3>Certificate of Appreciation from BIOBUILD Development Ltd. for my contribution as a Volunteer at BIOBUILD Family Day 2025</h3>
+                <div class="certificate-links">
+            <a href="https://www.linkedin.com/posts/talha-islam49599_gratitude-volunteerexperience-biobuild-activity-7436842348380213248-uG5J?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFBgjkwBSm4oEXYACnhSA06hvaSTqPjyJXw" 
+               target="_blank" 
+               rel="noreferrer" 
+               class="btn ghost-btn small-btn">
+              See more
+            </a>
+          </div>
+      </div>
+
+      <!-- Certificate 11 -->
+      <div class="skill-card scroll-layer layer-card">
+        <img src="/Asset/c11.jpg" alt="Leadership Certificate" class="certificate-img">
+        <h3>Organizer at "AIUB Cyber Gaming Fest 2025"</h3>
+                <div class="certificate-links">
+            <a href="https://www.linkedin.com/posts/talha-islam49599_aiub-acc-cybergamingfest2025-activity-7421237240980353024-6mJe?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFBgjkwBSm4oEXYACnhSA06hvaSTqPjyJXw" 
+               target="_blank" 
+               rel="noreferrer" 
+               class="btn ghost-btn small-btn">
+              See more
+            </a>
+          </div>
+      </div>
+
+      <!-- Certificate 10 -->
+      <div class="skill-card scroll-layer layer-card">
+        <img src="/Asset/c10.jpg" alt="Database Training Certificate" class="certificate-img">
+        <h3>Completed the “University Activation Programme 2025”</h3>
+                <div class="certificate-links">
+            <a href="https://www.linkedin.com/posts/talha-islam49599_universityactivationprogramme-ictdivision-activity-7391459313937981441-grJt?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFBgjkwBSm4oEXYACnhSA06hvaSTqPjyJXw" 
+               target="_blank" 
+               rel="noreferrer" 
+               class="btn ghost-btn small-btn">
+              See more
+            </a>
+          </div>
+      </div>
+
+      <!-- Certificate 9 -->
+      <div class="skill-card scroll-layer layer-card">
+        <img src="/Asset/c9.jpg" alt="volunteer in the Science Poster Contest 2022" class="certificate-img">
+        <h3>Volunteer at the vTutor.org Microsoft Office Specialist Bangladesh Championship 2025</h3>
+                <div class="certificate-links">
+            <a href="https://www.linkedin.com/posts/talha-islam49599_volunteerexperience-microsoftofficespecialist-activity-7381342637850796032-PFrL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFBgjkwBSm4oEXYACnhSA06hvaSTqPjyJXw" 
+               target="_blank" 
+               rel="noreferrer" 
+               class="btn ghost-btn small-btn">
+              See more
+            </a>
+          </div>
+      </div>
+
+<!-- Certificate 8 -->
+      <div class="skill-card scroll-layer layer-card">
+        <img src="/Asset/c8.jpg" alt="Programming Fundamentals Certificate" class="certificate-img">
+        <h3>Completed the IT Essentials course from Cisco Networking Academy!</h3>
+                <div class="certificate-links">
+            <a href="https://www.linkedin.com/posts/talha-islam49599_cisconetworkingacademy-it-networking-activity-7375193279698726912-06r3?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFBgjkwBSm4oEXYACnhSA06hvaSTqPjyJXw" 
+               target="_blank" 
+               rel="noreferrer" 
+               class="btn ghost-btn small-btn">
+              See more
+            </a>
+          </div>
+      </div>
+
+      <!-- Certificate 7 -->
+      <div class="skill-card scroll-layer layer-card">
+        <img src="/Asset/c7.jpg" alt="Web Development Workshop Certificate" class="certificate-img">
+        <h3>Volunteering at the National STEAM Olympiad 2024</h3>
+                <div class="certificate-links">
+            <a href="https://www.linkedin.com/posts/talha-islam49599_steam-volunteerexperience-educationforall-activity-7397287683992997888-x2bY?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFBgjkwBSm4oEXYACnhSA06hvaSTqPjyJXw" 
+               target="_blank" 
+               rel="noreferrer" 
+               class="btn ghost-btn small-btn">
+              See more
+            </a>
+          </div>
+      </div>
+
+      <!-- Certificate 6 -->
+      <div class="skill-card scroll-layer layer-card">
+        <img src="/Asset/c6.jpg" alt="Leadership Certificate" class="certificate-img">
+        <h3>Volunteer in the "CS Fest 2024"</h3>
+                <div class="certificate-links">
+            <a href="https://www.linkedin.com/posts/talha-islam49599_aiub-csfest2024-achievement-activity-7430948157909336064-vRnx?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFBgjkwBSm4oEXYACnhSA06hvaSTqPjyJXw" 
+               target="_blank" 
+               rel="noreferrer" 
+               class="btn ghost-btn small-btn">
+              See more
+            </a>
+          </div>
+      </div>
+
+      <!-- Certificate 5 -->
+      <div class="skill-card scroll-layer layer-card">
+        <img src="/Asset/c5.jpg" alt="Database Training Certificate" class="certificate-img">
+        <h3>Certificate of Appreciation at the Intra AIUB Programming Contest 2024!</h3>
+                <div class="certificate-links">
+            <a href="https://www.linkedin.com/posts/talha-islam49599_programming-aiub-achievement-activity-7368296581286035456-BWg2?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFBgjkwBSm4oEXYACnhSA06hvaSTqPjyJXw" 
+               target="_blank" 
+               rel="noreferrer" 
+               class="btn ghost-btn small-btn">
+              See more
+            </a>
+          </div>
+      </div>
+
+
+      <!-- Certificate 4 -->
+      <div class="skill-card scroll-layer layer-card">
+        <img src="/Asset/c4.jpg" alt="Database Training Certificate" class="certificate-img">
+        <h3>Completed the “Enhance Your Leadership”</h3>
+                <div class="certificate-links">
+            <a href="https://www.linkedin.com/posts/talha-islam49599_leadershipdevelopment-enhanceyourleadership-activity-7433873697104650240-TDwl?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFBgjkwBSm4oEXYACnhSA06hvaSTqPjyJXw" 
+               target="_blank" 
+               rel="noreferrer" 
+               class="btn ghost-btn small-btn">
+              See more
+            </a>
+          </div>
+      </div>
+      
+      <!-- Certificate 3 -->
+      <div class="skill-card scroll-layer layer-card">
+        <img src="/Asset/c3.jpg" alt="Database Training Certificate" class="certificate-img">
+        <h3>Attending in "Graphic Design Workshop 2023"</h3>
+                <div class="certificate-links">
+            <a href="https://www.linkedin.com/posts/talha-islam49599_uylab-graphicdesign-creativity-activity-7415746744501907456-Uz8O?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFBgjkwBSm4oEXYACnhSA06hvaSTqPjyJXw" 
+               target="_blank" 
+               rel="noreferrer" 
+               class="btn ghost-btn small-btn">
+              See more
+            </a>
+          </div>
+      </div>
+      
+      <!-- Certificate 2 -->
+      <div class="skill-card scroll-layer layer-card">
+        <img src="/Asset/c2.jpg" alt="Database Training Certificate" class="certificate-img">
+        <h3>Volunteer in the "Science Poster Contest 2022"</h3>
+                <div class="certificate-links">
+            <a href="https://www.linkedin.com/posts/talha-islam49599_aiub-volunteerexperience-teamwork-activity-7408125307842568193-6CiP?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFBgjkwBSm4oEXYACnhSA06hvaSTqPjyJXw" 
+               target="_blank" 
+               rel="noreferrer" 
+               class="btn ghost-btn small-btn">
+              See more
+            </a>
+          </div>
+      </div>
+
+      <!-- Certificate 1 -->
+      <div class="skill-card scroll-layer layer-card">
+        <img src="/Asset/c1.jpg" alt="Database Training Certificate" class="certificate-img">
+        <h3>Workshop on "Travel Photography"</h3>
+                <div class="certificate-links">
+            <a href="https://www.linkedin.com/posts/talha-islam49599_aiub-photography-travelphotography-activity-7383537084591927296-xqo0?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFBgjkwBSm4oEXYACnhSA06hvaSTqPjyJXw" 
+               target="_blank" 
+               rel="noreferrer" 
+               class="btn ghost-btn small-btn">
+              See more
+            </a>
+          </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+  <!-- ======================
+       Contact Section
+       ====================== -->
+  <section class="section scroll-section" id="contact">
+    <div class="container section-inner contact-inner">
+      <div class="section-header">
+        <h2 class="section-title section-title-contact scroll-layer layer-1">Contact</h2>
+        <p class="section-description scroll-layer layer-2">
+          Have a question, a project idea, or want to collaborate? Send me a
+          message and I'll get back to you as soon as I can.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-details scroll-layer layer-3">
+          <h3>Let's work together</h3>
+          <p>
+            I'm open to freelance work, full-time opportunities, and interesting
+            collaborations. Feel free to reach out through the form or directly
+            via email.
+          </p>
+
+          <ul class="contact-list">
+            <li>
+              <i class="fa-solid fa-envelope"></i>
+              <a href="mailto:youremail@example.com">talhasedubd@gmail.com</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-phone"></i>
+              <a href="tel:+1234567890">+8801521720609</a>
+            </li>
+            <li>
+              <i class="fa-brands fa-github"></i>
+              <a href="https://github.com/talha599" target="_blank" rel="noreferrer">
+                github.com/talha599
+              </a>
+            </li>
+            <li>
+              <i class="fa-brands fa-linkedin"></i>
+              <a href="https://www.linkedin.com/in/talha-islam49599/" target="_blank" rel="noreferrer">
+                linkedin.com/in/talha-islam49599/
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <form class="contact-form scroll-layer layer-4" id="contact-form">
+          <div class="form-row">
+            <div class="form-field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Muhammad Talha Islam" required />
+            </div>
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@gmail.com" required />
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Tell me about your project or idea..."
+              required></textarea>
+          </div>
+
+          <button type="submit" class="btn primary-btn form-btn">
+            <span>Send Message</span>
+          </button>
+          <p class="form-status" id="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================
+       Footer
+       ====================== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> Muhammad Talha Islam. All rights reserved.</p>
+      <a href="#hero" class="back-to-top">
+        <i class="fa-solid fa-arrow-up"></i>
+        <span>Back to top</span>
+      </a>
+    </div>
+  </footer>
+
+  <!-- Main script -->
+  <script src="script.js"></script>
+</body>
+
+</html>
+
+
+
+
