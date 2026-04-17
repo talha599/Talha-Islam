@@ -494,7 +494,7 @@ body.dark .hero-eyebrow {
   margin: 0 0 0.35rem;
   font-size: clamp(var(--text-4xl), 7vw, var(--text-6xl));
   letter-spacing: -0.04em;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.1;
   background: linear-gradient(135deg, #92400e 0%, #b45309 35%, #d97706 70%, #f59e0b 100%);
   -webkit-background-clip: text;
@@ -609,8 +609,17 @@ body.dark .hero-subtitle {
 
 .hero-actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem;
+  gap: 15px;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .hero-actions {
+    justify-content: center;   /* center horizontally */
+    align-items: center;
+    flex-wrap: wrap;           /* prevents overflow */
+    text-align: center;
+  }
 }
 
 .btn {
@@ -1520,6 +1529,7 @@ body.dark .back-to-top {
   }
 
 
+
   .nav {
   position: fixed;
   top: 68px;
@@ -2250,18 +2260,65 @@ body.dark .back-to-top {
   100% { transform: translateY(0); opacity: 0.6; }
 }
 
-/* ===============================
-   SCROLL REVEAL (AOS STYLE)
-   =============================== */
-
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: 0.8s ease;
+#changing-text {
+  font-family: monospace;
+  letter-spacing: 2px;
+  display: inline-block;
+  position: relative;
 }
 
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
+/* Blinking cursor */
+.cursor {
+  display: inline-block;
+  margin-left: 5px;
+  animation: blink 1s infinite;
+  color: #b45309; /* match your theme */
 }
 
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+/* Glitch effect */
+.glitch {
+  position: relative;
+  color: white;
+  animation: glitch 0.3s linear 2;
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow: 2px 0 red, -2px 0 blue;
+  }
+  25% {
+    text-shadow: -2px 0 red, 2px 0 blue;
+  }
+  50% {
+    text-shadow: 2px 2px red, -2px -2px blue;
+  }
+  75% {
+    text-shadow: -2px -2px red, 2px 2px blue;
+  }
+  100% {
+    text-shadow: none;
+  }
+}
+
+.hero-subtitle {
+  font-size: 2.3rem;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+/* Blinking cursor */
+.cursor {
+  margin-left: 5px;
+  animation: blink 1s infinite;
+  color: #b45309; /* match your theme */
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
