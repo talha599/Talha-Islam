@@ -233,11 +233,14 @@ window.addEventListener("scroll", () => {
 
 
 const words = [
-  "Software Developer",
-  "Web Developer",
+  "Developer",
+  "Backend Engineer",
   "Problem Solver",
   "AI Enthusiast",
-  "Team Leader"
+  "ML Explorer",
+  "Tech Innovator",
+  "System Designer",
+  "Team Leader",
 ];
 
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
