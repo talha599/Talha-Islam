@@ -201,6 +201,21 @@ document.querySelectorAll(".scroll-section").forEach(section => {
   });
 });
 
+// Animate project cards when they enter the viewport
+const projectCards = document.querySelectorAll("#projects .project-card");
+if ("IntersectionObserver" in window && projectCards.length) {
+  const projectCardObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle("card-visible", entry.isIntersecting);
+      });
+    },
+    { root: null, threshold: 0.2, rootMargin: "0px 0px -8% 0px" }
+  );
+
+  projectCards.forEach((card) => projectCardObserver.observe(card));
+}
+
 // Click to expand card
 function toggleCard(card) {
   card.classList.toggle("active");
