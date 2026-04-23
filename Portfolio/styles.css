@@ -517,7 +517,7 @@ body.dark .hero-title {
   font-family: var(--font-body);
   margin: 0 0 1rem;
   font-size: clamp(var(--text-base), 2vw, var(--text-xl));
-  font-weight: 600;
+  font-weight: 400;
   color: var(--about-accent);
   animation: fadeInUp 0.8s ease 0.2s both;
 }
@@ -1482,6 +1482,8 @@ body.dark .back-to-top {
 
 /* ===============================
    Responsive Adjustments
+   Desktop defaults are defined above.
+   Mobile and tablet overrides are grouped below.
    =============================== */
 
 @media (max-width: 960px) {
@@ -2399,6 +2401,197 @@ body.dark .flip-card {
   font-size: 12px;
   line-height: 1.4;
   opacity: 0.8;
+}
+
+/* ===============================
+   Extra Components: Mobile / Tablet Overrides
+   These sections were mostly desktop-first above.
+   The rules below make them behave properly on smaller screens.
+   =============================== */
+
+@media (max-width: 768px) {
+  .experience-section {
+    padding: 56px 16px;
+  }
+
+  .timeline {
+    margin: 40px auto 0;
+    padding: 0 0 0 1.25rem;
+  }
+
+  .timeline::before {
+    left: 14px;
+    transform: none;
+  }
+
+  .timeline-item,
+  .timeline-item:nth-child(odd),
+  .timeline-item:nth-child(even) {
+    width: 100%;
+    left: 0;
+    padding: 0 0 1.25rem 1.4rem;
+  }
+
+  .timeline-card {
+    padding: 1.1rem;
+    text-align: left;
+    transform: none;
+  }
+
+  .timeline-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .timeline-dot {
+    left: 0;
+    top: 28px;
+    transform: translateX(-50%);
+  }
+
+  .exp-logo {
+    width: 60px;
+    height: 60px;
+    margin: 0 0 0.85rem;
+  }
+
+  .timeline-card h3,
+  .timeline-card span,
+  .timeline-card p {
+    text-align: left;
+  }
+
+  #changing-text {
+    letter-spacing: 1px;
+    word-break: break-word;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.2rem, 5vw, 1.7rem);
+    line-height: 1.35;
+  }
+
+  .flip-card {
+    aspect-ratio: auto;
+    min-height: 0;
+  }
+
+  .flip-card:hover {
+    transform: none;
+    box-shadow: 0 0 18px rgba(13, 148, 136, 0.18);
+  }
+
+  .flip-card-inner {
+    display: flex;
+    flex-direction: column;
+    transform: none;
+    height: auto;
+  }
+
+  .flip-card:hover .flip-card-inner {
+    transform: none;
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    position: relative;
+    height: auto;
+    backface-visibility: visible;
+  }
+
+  .flip-card-back {
+    transform: none;
+    min-height: 150px;
+    padding: 1rem;
+  }
+
+  .flip-card-front img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .flip-card-back p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience-section {
+    padding: 44px 12px;
+  }
+
+  .timeline {
+    padding-left: 1rem;
+  }
+
+  .timeline::before {
+    left: 12px;
+  }
+
+  .timeline-item,
+  .timeline-item:nth-child(odd),
+  .timeline-item:nth-child(even) {
+    padding: 0 0 1rem 1.15rem;
+  }
+
+  .timeline-dot {
+    top: 24px;
+    width: 14px;
+    height: 14px;
+  }
+
+  .timeline-card {
+    padding: 0.95rem;
+    border-radius: 16px;
+  }
+
+  .timeline-card h3 {
+    font-size: 1rem;
+  }
+
+  .timeline-card span,
+  .timeline-card p,
+  .details,
+  .short {
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+
+  .exp-logo {
+    width: 54px;
+    height: 54px;
+  }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+  }
+
+  #changing-text {
+    letter-spacing: 0.5px;
+  }
+
+  .flip-card {
+    border-width: 2px;
+    border-radius: 14px;
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    border-radius: 14px;
+  }
+
+  .flip-card-back {
+    gap: 0.75rem;
+    min-height: 135px;
+    padding: 0.9rem;
+  }
+
+  .flip-card-back p {
+    font-size: 0.76rem;
+  }
+
+  .flip-card-back .btn {
+    width: 100%;
+    max-width: none;
+  }
 }
 
 
