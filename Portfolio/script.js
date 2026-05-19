@@ -91,7 +91,6 @@ if ("IntersectionObserver" in window) {
         if (entry.isIntersecting) {
           navLinks.forEach((navLink) => navLink.classList.remove("active"));
           link.classList.add("active");
-          entry.target.classList.add("visible");
           // Layer-by-layer: add .in-view to scroll sections for reveal animations
           if (entry.target.classList.contains("scroll-section")) {
             entry.target.classList.add("in-view");
@@ -99,29 +98,10 @@ if ("IntersectionObserver" in window) {
         }
       });
     },
-    { root: null, threshold: 0.2, rootMargin: "0px 0px -5% 0px" }
+    { root: null, threshold: 0.2, rootMargin: "0px 0px -5% 0px" },
   );
 
   sections.forEach((section) => observer.observe(section));
-}
-
-// ===============================
-// Scroll-reveal: layer-by-layer in-view
-// ===============================
-// When a .scroll-section enters viewport, CSS reveals .scroll-layer elements with staggered delays.
-const scrollSections = document.querySelectorAll(".scroll-section");
-if ("IntersectionObserver" in window && scrollSections.length) {
-  const scrollRevealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in-view");
-        }
-      });
-    },
-    { root: null, threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
-  );
-  scrollSections.forEach((el) => scrollRevealObserver.observe(el));
 }
 
 // ===============================
@@ -146,7 +126,8 @@ if (contactForm && formStatus) {
     }
 
     // Demo behavior: show success message instead of real backend call
-    formStatus.textContent = "Thanks for your message! I'll get back to you soon.";
+    formStatus.textContent =
+      "Thanks for your message! I'll get back to you soon.";
     formStatus.classList.remove("error");
     formStatus.classList.add("success");
 
@@ -166,10 +147,6 @@ if (contactForm && formStatus) {
 if (yearSpan) {
   yearSpan.textContent = new Date().getFullYear().toString();
 }
-
-// See More Certificates
-const seeMoreBtn = document.getElementById("see-more-btn");
-const extraCertificates = document.querySelectorAll(".extra-certificate");
 
 // Certificate Image Popup (Works for Unlimited Images)
 
@@ -194,43 +171,17 @@ document.addEventListener("click", function (e) {
 });
 
 // Auto stagger animation for unlimited cards
-document.querySelectorAll(".scroll-section").forEach(section => {
+document.querySelectorAll(".scroll-section").forEach((section) => {
   const cards = section.querySelectorAll(".layer-card");
   cards.forEach((card, index) => {
     card.style.setProperty("--card-index", index);
   });
 });
 
-// Animate project cards when they enter the viewport
-const projectCards = document.querySelectorAll("#projects .project-card");
-if ("IntersectionObserver" in window && projectCards.length) {
-  const projectCardObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        entry.target.classList.toggle("card-visible", entry.isIntersecting);
-      });
-    },
-    { root: null, threshold: 0.2, rootMargin: "0px 0px -8% 0px" }
-  );
-
-  projectCards.forEach((card) => projectCardObserver.observe(card));
-}
-
 // Click to expand card
 function toggleCard(card) {
   card.classList.toggle("active");
 }
-
-// Scroll reveal (AOS style)
-window.addEventListener("scroll", () => {
-  document.querySelectorAll(".reveal").forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    if (top < window.innerHeight - 100) {
-      el.classList.add("active");
-    }
-  });
-});
-
 
 const words = [
   "Software Dev",
@@ -247,7 +198,7 @@ const words = [
   "Web Developer",
   "DevOps Learner",
   "Clean Coder",
-  "Debug Mode On"
+  "Debug Mode On",
 ];
 
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -258,6 +209,8 @@ let wordIndex = 0;
 let iteration = 0;
 
 function decodeText() {
+  if (!el) return;
+
   const currentWord = words[wordIndex];
 
   const interval = setInterval(() => {
@@ -287,4 +240,32 @@ function decodeText() {
 }
 
 // Start animation
-decodeText();
+if (el) {
+  decodeText();
+}
+
+$(document).ready(function () {
+  $(".projects-slides").owlCarousel({
+    loop: true,
+    margin: 25,
+    nav: true,
+    dots: true,
+    autoplay: true,
+    autoplayTimeout: 3500,
+    smartSpeed: 800,
+
+    responsive: {
+      0: {
+        items: 1,
+      },
+
+      768: {
+        items: 2,
+      },
+
+      1200: {
+        items: 3,
+      },
+    },
+  });
+});
